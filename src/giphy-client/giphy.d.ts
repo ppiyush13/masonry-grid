@@ -1,0 +1,3 @@
+interface Trending {
+  id: string;
+}

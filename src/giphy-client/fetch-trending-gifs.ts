@@ -17,7 +17,7 @@ export const createTrendingGifsFetcher = (pageSize = 50) => {
 
     const response = await fetch(giphyUrl.toString());
 
-    const { data } = await response.json();
+    const { data } = (await response.json()) as { data: Trending[] };
     return data;
   };
 };
