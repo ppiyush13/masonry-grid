@@ -10,9 +10,9 @@ export default function App() {
   );
 
   return (
-    <div className={'App'}>
+    <main className={'App'}>
       <MasonryGrid data={data} />
       <div ref={loaderRef} style={{ height: '1px' }}></div>
-    </div>
+    </main>
   );
 }
