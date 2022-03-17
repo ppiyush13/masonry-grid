@@ -1,18 +1,18 @@
 import { useEffect } from 'react';
-import { fetchGIFs } from './fetch-trending-gifs';
+import { createTrendingGifsFetcher } from './giphy-client';
 
-const fetcher = fetchGIFs();
+const fetchTrendingGifs = createTrendingGifsFetcher();
 
 export default function App() {
   useEffect(() => {
     const executeEffect = async () => {
       {
-        const data = await fetcher();
+        const data = await fetchTrendingGifs();
         console.log(data);
       }
 
       {
-        const data = await fetcher();
+        const data = await fetchTrendingGifs();
         console.log(data);
       }
     };

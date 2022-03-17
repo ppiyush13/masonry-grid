@@ -4,7 +4,7 @@ const giphyUrl = new URL('https://api.giphy.com/v1/gifs/trending');
 /* set api_key query param */
 giphyUrl.searchParams.set('api_key', import.meta.env.VITE_GIPHY_API_KEY);
 
-export const fetchGIFs = (pageSize = 50) => {
+export const createTrendingGifsFetcher = (pageSize = 50) => {
   let pageNumber = 0;
 
   return async () => {
