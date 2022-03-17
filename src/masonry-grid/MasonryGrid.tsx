@@ -35,6 +35,7 @@ const createElement = (images) => {
       width="100%"
       title={title}
       preload="none"
+      crossorigin="anonymous"
       style="aspect-ratio: ${dataItem.width} / ${
     dataItem.height
   }; background-color: ${getColor()}"
