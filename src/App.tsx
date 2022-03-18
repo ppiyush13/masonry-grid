@@ -1,6 +1,6 @@
 import { createTrendingGifsFetcher } from './giphy-client';
 import { useInfiniteLoading } from './infinite-loading/useInfiniteLoading';
-import { MasonryGrid } from './masonry-grid';
+import { MasonryGrid, ReactMasonryGrid } from './masonry-grid';
 
 const fetchTrendingGifs = createTrendingGifsFetcher();
 
@@ -11,7 +11,7 @@ export default function App() {
 
   return (
     <main className={'App'}>
-      <MasonryGrid data={data} />
+      <ReactMasonryGrid data={data} />
       <div ref={loaderRef} style={{ height: '1px' }}></div>
     </main>
   );
