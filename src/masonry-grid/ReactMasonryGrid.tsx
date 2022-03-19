@@ -31,6 +31,7 @@ export const ReactMasonryGrid = ({ data }: { data: Trending[] }) => {
       const dataItem = data[index].images;
       const bucketIndex = nextBucket();
       updatesLanes[bucketIndex].push(<Video key={index} dataItem={dataItem} />);
+      //updatesLanes[bucketIndex].push(<Gifs key={index} dataItem={dataItem} />);
 
       heights.current[bucketIndex] += getHeight(dataItem.downsized_small);
     }
@@ -65,6 +66,21 @@ const Video = ({ dataItem }: { dataItem: Trending['images'] }) => {
         backgroundColor: getColor(),
       }}
     ></video>
+  );
+};
+
+const Gifs = ({ dataItem }: { dataItem: Trending['images'] }) => {
+  return (
+    <img
+      src={dataItem.downsized.url}
+      width="100%"
+      loading="lazy"
+      crossOrigin="anonymous"
+      style={{
+        aspectRatio: `${dataItem.downsized_small.width} / ${dataItem.downsized_small.height}`,
+        backgroundColor: getColor(),
+      }}
+    ></img>
   );
 };
 
