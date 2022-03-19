@@ -25,6 +25,7 @@ export const ReactMasonryGrid = ({ data }: { data: Trending[] }) => {
       return minIndex;
     };
 
+    console.time('start');
     const updatesLanes = [...lanes];
     for (let index = currentIndex.current; index < data.length; index++) {
       const dataItem = data[index].images;
@@ -36,6 +37,7 @@ export const ReactMasonryGrid = ({ data }: { data: Trending[] }) => {
 
     setLanes(updatesLanes);
     currentIndex.current = data.length;
+    console.timeEnd('start');
   }, [data]);
 
   return (
