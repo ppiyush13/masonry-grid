@@ -60,7 +60,7 @@ const Video = ({ dataItem }: { dataItem: Trending['images'] }) => {
       loop
       width="100%"
       preload="none"
-      crossOrigin="anonymous"
+      crossOrigin1="anonymous"
       style={{
         aspectRatio: `${dataItem.downsized_small.width} / ${dataItem.downsized_small.height}`,
         backgroundColor: getColor(),
