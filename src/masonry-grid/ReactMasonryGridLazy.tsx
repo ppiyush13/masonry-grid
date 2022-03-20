@@ -51,48 +51,51 @@ export const ReactMasonryGridLazy = ({ data }: { data: Trending[] }) => {
   );
 };
 
+const intersectionObserver = new IntersectionObserver(async (entries) => {
+  //console.log(entries);
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.innerHTML = `
+          <video
+            src=${entry.target.getAttribute('data-url')}
+            autoPlay
+            muted
+            loop
+            height="100%"
+            width="100%"
+            preload="none"
+            crossOrigin="anonymous"
+            style="height:100%;width:100%;"
+          />
+        `;
+    } else {
+      entry.target.innerHTML = '';
+    }
+  });
+  // if (ref.current == null) return;
+  // if (entries[0].isIntersecting) {
+  //   ref.current.innerHTML = `
+  //     <video
+  //       src=${dataItem.downsized_small.mp4}
+  //       autoPlay
+  //       muted
+  //       loop
+  //       width="100%"
+  //       preload="none"
+  //       crossOrigin="anonymous"
+  //     />
+  //   `;
+  // } else {
+  //   ref.current.innerHTML = '';
+  // }
+});
+
 const Video = ({ dataItem }: { dataItem: Trending['images'] }) => {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (ref.current == null) return;
-
-    const intersectionObserver = new IntersectionObserver(async (entries) => {
-      if (ref.current == null) return;
-      if (entries[0].isIntersecting) {
-        ref.current.innerHTML = `
-          <video
-            src=${dataItem.downsized_small.mp4}
-            autoPlay
-            muted
-            loop
-            width="100%"
-            preload="none"
-            crossOrigin="anonymous"
-          />
-        `;
-      } else {
-        ref.current.innerHTML = '';
-      }
-    });
-
     intersectionObserver.observe(ref.current);
-
-    const video = (
-      <video
-        src={dataItem.downsized_small.mp4}
-        autoPlay
-        muted
-        loop
-        width="100%"
-        preload="none"
-        crossOrigin="anonymous"
-        style={{
-          aspectRatio: `${dataItem.downsized_small.width} / ${dataItem.downsized_small.height}`,
-          backgroundColor: getColor(),
-        }}
-      ></video>
-    );
 
     return () => {
       if (ref.current) {
@@ -104,6 +107,7 @@ const Video = ({ dataItem }: { dataItem: Trending['images'] }) => {
   return (
     <div
       ref={ref}
+      data-url={dataItem.downsized_small.mp4}
       style={{
         width: '100%',
         aspectRatio: `${dataItem.downsized_small.width} / ${dataItem.downsized_small.height}`,
