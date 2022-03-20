@@ -52,7 +52,7 @@ export const MasonryGridIdle = <T extends unknown>({
 
     const refs = [refA.current, refB.current, refC.current, refD.current];
 
-    console.time('start');
+    //console.time('start');
     /*let stringItems = new Array(4).fill('');
     let items = new Array(4)
       .fill(null)
@@ -83,7 +83,7 @@ export const MasonryGridIdle = <T extends unknown>({
       nextBucket,
       heights.current,
     );
-    console.timeEnd('start');
+    //console.timeEnd('start');
     currentIndex.current = data.length;
   }, [data]);
 
@@ -107,7 +107,6 @@ const appendElements = (
   nextBucket: () => number,
   heights: number[],
 ) => {
-  console.log('start', currentIndex);
   stepify(currentIndex, data.length, 50, (index) => {
     const dataItem = data[index].images;
     const bucketIndex = nextBucket();
@@ -175,9 +174,10 @@ const stepify = async (
       i < itemsPerStep && idx < total;
       i++, idx++
     ) {
-      requestIdleCallback(() => {
-        callback(start + idx);
-      });
+      // setTimeout(() => {
+      //   callback(start + idx);
+      // }, i * 250);
+      requestIdleCallback(() => callback(start + idx));
     }
     console.timeEnd('start');
 
