@@ -52,35 +52,64 @@ export const ReactMasonryGridLazy = ({ data }: { data: Trending[] }) => {
 };
 
 const Video = ({ dataItem }: { dataItem: Trending['images'] }) => {
-  return (
-    <video
-      src={dataItem.downsized_small.mp4}
-      autoPlay
-      muted
-      loop
-      width="100%"
-      preload="none"
-      crossOrigin="anonymous"
-      style={{
-        aspectRatio: `${dataItem.downsized_small.width} / ${dataItem.downsized_small.height}`,
-        backgroundColor: getColor(),
-      }}
-    ></video>
-  );
-};
+  const ref = useRef<HTMLDivElement>(null);
 
-const Gifs = ({ dataItem }: { dataItem: Trending['images'] }) => {
+  useEffect(() => {
+    if (ref.current == null) return;
+
+    const intersectionObserver = new IntersectionObserver(async (entries) => {
+      if (ref.current == null) return;
+      if (entries[0].isIntersecting) {
+        ref.current.innerHTML = `
+          <video
+            src=${dataItem.downsized_small.mp4}
+            autoPlay
+            muted
+            loop
+            width="100%"
+            preload="none"
+            crossOrigin="anonymous"
+          />
+        `;
+      } else {
+        ref.current.innerHTML = '';
+      }
+    });
+
+    intersectionObserver.observe(ref.current);
+
+    const video = (
+      <video
+        src={dataItem.downsized_small.mp4}
+        autoPlay
+        muted
+        loop
+        width="100%"
+        preload="none"
+        crossOrigin="anonymous"
+        style={{
+          aspectRatio: `${dataItem.downsized_small.width} / ${dataItem.downsized_small.height}`,
+          backgroundColor: getColor(),
+        }}
+      ></video>
+    );
+
+    return () => {
+      if (ref.current) {
+        intersectionObserver.unobserve(ref.current);
+      }
+    };
+  }, []);
+
   return (
-    <img
-      src={dataItem.downsized.url}
-      width="100%"
-      loading="lazy"
-      crossOrigin="anonymous"
+    <div
+      ref={ref}
       style={{
+        width: '100%',
         aspectRatio: `${dataItem.downsized_small.width} / ${dataItem.downsized_small.height}`,
         backgroundColor: getColor(),
       }}
-    ></img>
+    ></div>
   );
 };
 
