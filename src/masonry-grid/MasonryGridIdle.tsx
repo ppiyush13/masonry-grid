@@ -107,6 +107,7 @@ const appendElements = (
   nextBucket: () => number,
   heights: number[],
 ) => {
+  console.log('start', currentIndex);
   stepify(currentIndex, data.length, 50, (index) => {
     const dataItem = data[index].images;
     const bucketIndex = nextBucket();
@@ -175,7 +176,7 @@ const stepify = async (
       i++, idx++
     ) {
       requestIdleCallback(() => {
-        callback(idx);
+        callback(start + idx);
       });
     }
     console.timeEnd('start');
