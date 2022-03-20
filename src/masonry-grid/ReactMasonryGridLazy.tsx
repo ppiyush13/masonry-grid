@@ -109,6 +109,7 @@ const Video = ({ dataItem }: { dataItem: Trending['images'] }) => {
       ref={ref}
       data-url={dataItem.downsized_small.mp4}
       style={{
+        display: 'flex',
         width: '100%',
         aspectRatio: `${dataItem.downsized_small.width} / ${dataItem.downsized_small.height}`,
         backgroundColor: getColor(),
