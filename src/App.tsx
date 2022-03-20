@@ -2,7 +2,8 @@ import { version as reactDOMVersion } from 'react-dom';
 import { useEffect, version as reactVersion } from 'react';
 import { createTrendingGifsFetcher } from './giphy-client';
 import { useInfiniteLoading } from './infinite-loading/useInfiniteLoading';
-import { MasonryGrid, ReactMasonryGrid } from './masonry-grid';
+import { MasonryGrid, MasonryGridIdle, ReactMasonryGrid } from './masonry-grid';
+import { Route, Routes } from 'react-router-dom';
 
 const fetchTrendingGifs = createTrendingGifsFetcher();
 
@@ -18,7 +19,15 @@ export default function App() {
 
   return (
     <main className={'App'}>
-      <ReactMasonryGrid data={data} />
+      <Routes>
+        <Route path={'/react'} element={<ReactMasonryGrid data={data} />} />
+        <Route path={'/javascript'} element={<MasonryGrid data={data} />} />
+        <Route
+          path={'/javascript-idle'}
+          element={<MasonryGridIdle data={data} />}
+        />
+      </Routes>
+
       <div ref={loaderRef} style={{ height: '1px' }}></div>
     </main>
   );
