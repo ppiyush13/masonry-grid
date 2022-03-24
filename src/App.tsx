@@ -26,7 +26,7 @@ export default function App() {
   return (
     <main className={'App'}>
       <Routes>
-        <Route path={'/'} element={<Home />} />
+        <Route path={'/'} element={<ReactMasonryGrid data={data} />} />
         <Route path={'/react'} element={<ReactMasonryGrid data={data} />} />
         <Route path={'/javascript'} element={<MasonryGrid data={data} />} />
         <Route
