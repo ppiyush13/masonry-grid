@@ -9,6 +9,7 @@ import {
   ReactMasonryGridLazy,
 } from './masonry-grid';
 import { Route, Routes } from 'react-router-dom';
+import { Home } from './Home';
 
 const fetchTrendingGifs = createTrendingGifsFetcher();
 
@@ -25,6 +26,7 @@ export default function App() {
   return (
     <main className={'App'}>
       <Routes>
+        <Route path={'/'} element={<Home />} />
         <Route path={'/react'} element={<ReactMasonryGrid data={data} />} />
         <Route path={'/javascript'} element={<MasonryGrid data={data} />} />
         <Route

@@ -51,6 +51,21 @@ export const ReactMasonryGridLazy = ({ data }: { data: Trending[] }) => {
   );
 };
 
+function isElementInViewport(el: Element) {
+  const rect = el.getBoundingClientRect();
+
+  return (
+    rect.top >= 0 &&
+    rect.left >= 0 &&
+    rect.bottom <=
+      (window.innerHeight ||
+        document.documentElement.clientHeight) /* or $(window).height() */ &&
+    rect.right <=
+      (window.innerWidth ||
+        document.documentElement.clientWidth) /* or $(window).width() */
+  );
+}
+
 const intersectionObserver = new IntersectionObserver(async (entries) => {
   //console.log(entries);
   entries.forEach((entry) => {
@@ -71,23 +86,25 @@ const intersectionObserver = new IntersectionObserver(async (entries) => {
     } else {
       entry.target.innerHTML = '';
     }
+
+    //});
+    // if (ref.current == null) return;
+    // if (entries[0].isIntersecting) {
+    //   ref.current.innerHTML = `
+    //     <video
+    //       src=${dataItem.downsized_small.mp4}
+    //       autoPlay
+    //       muted
+    //       loop
+    //       width="100%"
+    //       preload="none"
+    //       crossOrigin="anonymous"
+    //     />
+    //   `;
+    // } else {
+    //   ref.current.innerHTML = '';
+    // }
   });
-  // if (ref.current == null) return;
-  // if (entries[0].isIntersecting) {
-  //   ref.current.innerHTML = `
-  //     <video
-  //       src=${dataItem.downsized_small.mp4}
-  //       autoPlay
-  //       muted
-  //       loop
-  //       width="100%"
-  //       preload="none"
-  //       crossOrigin="anonymous"
-  //     />
-  //   `;
-  // } else {
-  //   ref.current.innerHTML = '';
-  // }
 });
 
 const Video = ({ dataItem }: { dataItem: Trending['images'] }) => {
